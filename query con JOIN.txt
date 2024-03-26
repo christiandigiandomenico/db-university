@@ -54,7 +54,7 @@ ON teacher_id = teachers.id
 6. Selezionare tutti i docenti che insegnano nel Dipartimento di
 Matematica (54)
 
-SELECT departments.name, teachers.name, teachers.surname
+SELECT DISTINCT departments.name, teachers.name, teachers.surname
 FROM `departments`
 INNER JOIN degrees
 ON departments.id = department_id
@@ -70,7 +70,7 @@ WHERE departments.id = 5
 per ogni esame, stampando anche il voto massimo. Successivamente,
 filtrare i tentativi con voto minimo 18.
 
-SELECT students.name, students.surname, MAX(exam_student.vote), courses.name
+SELECT students.name, students.surname, courses.name, MAX(exam_student.vote), COUNT(exams.id)
 FROM `students`
 INNER JOIN exam_student
 ON students.id = student_id
@@ -82,7 +82,7 @@ GROUP BY student_id;
 
 _______________
 
-SELECT students.name, students.surname, MAX(exam_student.vote), courses.name
+SELECT students.name, students.surname, MAX(exam_student.vote), courses.name, COUNT(exams.id)
 FROM `students`
 INNER JOIN exam_student
 ON students.id = student_id
