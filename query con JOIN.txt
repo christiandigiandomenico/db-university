@@ -73,22 +73,22 @@ filtrare i tentativi con voto minimo 18.
 SELECT students.name, students.surname, courses.name, MAX(exam_student.vote), COUNT(exams.id)
 FROM `students`
 INNER JOIN exam_student
-ON students.id = student_id
+ON students.id = exam_student.student_id
 INNER JOIN exams
-ON exam_id = exams.id
+ON exams.id = exam_student.exam_id
 INNER JOIN courses
-ON course_id = courses.id
+ON courses.id = exams.course_id
 GROUP BY student_id;
 
 _______________
 
-SELECT students.name, students.surname, MAX(exam_student.vote), courses.name, COUNT(exams.id)
+SELECT students.name, students.surname, courses.name, MAX(exam_student.vote), COUNT(exams.id)
 FROM `students`
 INNER JOIN exam_student
-ON students.id = student_id
+ON students.id = exam_student.student_id
 INNER JOIN exams
-ON exam_id = exams.id
+ON exams.id = exam_student.exam_id
 INNER JOIN courses
-ON course_id = courses.id
+ON courses.id = exams.course_id
 WHERE exam_student.vote > 18
 GROUP BY student_id
